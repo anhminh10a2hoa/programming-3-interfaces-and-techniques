@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MainClass {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter numbers: ");
+        System.out.print("Enter numbers:");
         String input = scanner.nextLine();
         scanner.close();
 
@@ -17,6 +17,6 @@ public class MainClass {
         }
 
         double mean = sum / numbers.length;
-        System.out.println("Mean: " + mean);
+        System.out.println("\nMean: " + mean);
     }
 }
