@@ -12,7 +12,7 @@ public class Parameters {
         List<String> parameters = new ArrayList<>();
 
         System.out.println("Parameters:");
-        while (true) {
+        while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.isEmpty()) {
                 scanner.close();        
