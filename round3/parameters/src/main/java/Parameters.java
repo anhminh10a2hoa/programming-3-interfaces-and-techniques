@@ -13,8 +13,9 @@ public class Parameters {
 
         System.out.println("Parameters:");
         while (true) {
-            String input = scanner.nextLine().trim();
+            String input = scanner.nextLine();
             if (input.isEmpty()) {
+                scanner.close();        
                 break;
             }
             parameters.add(input);
