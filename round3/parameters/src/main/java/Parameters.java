@@ -15,7 +15,7 @@ public class Parameters {
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.isEmpty()) {
-                scanner.close();        
+                scanner.close();
                 break;
             }
             parameters.add(input);
@@ -32,8 +32,8 @@ public class Parameters {
 
         // Print the table content
         for (int i = 0; i < parameters.size(); i++) {
-            System.out.format("# %-" + (col1Width - 2) + "d | %-" + (col2Width - 2) + "s #\n", i + 1, parameters.get(i));
-            if(i != parameters.size()) {
+            System.out.format("# %" + (col1Width - 2) + "d | %-" + (col2Width - 2) + "s #\n", i + 1, parameters.get(i));
+            if(i != parameters.size() - 1) {
                 createBorder(col1Width, col2Width, "middle");
             }
         }
