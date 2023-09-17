@@ -25,7 +25,7 @@ public class StudentRegister {
     public ArrayList<Course> getCourses() {
         // Sort courses by name in alphabetical order
         ArrayList<Course> sortedCourses = new ArrayList<>(courses);
-        Collections.sort(sortedCourses, Comparator.comparing(Course::getCode));
+        Collections.sort(sortedCourses, Comparator.comparing(Course::getName));
         return sortedCourses;
     }
 
@@ -65,7 +65,11 @@ public class StudentRegister {
         }
 
         if (order.equals("by name")) {
-            Collections.sort(studentAttainments, Comparator.comparing(Attainment::getCourseCode));
+          Collections.sort(studentAttainments, (a1, a2) -> {
+            String courseName1 = getCourseNameByCode(a1.getCourseCode());
+            String courseName2 = getCourseNameByCode(a2.getCourseCode());
+            return courseName1.compareTo(courseName2);
+        });
         } else if (order.equals("by code")) {
             Collections.sort(studentAttainments, Comparator.comparing(Attainment::getCourseCode));
         }
@@ -84,4 +88,13 @@ public class StudentRegister {
         // Overload without specifying order (prints in the order they were stored)
         printStudentAttainments(studentNumber, "");
     }
+
+    private String getCourseNameByCode(String courseCode) {
+      for (Course course : courses) {
+          if (course.getCode().equals(courseCode)) {
+              return course.getName();
+          }
+      }
+      return "Unknown Course";
+  }
 }
