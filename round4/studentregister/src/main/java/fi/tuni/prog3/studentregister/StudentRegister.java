@@ -71,7 +71,7 @@ public class StudentRegister {
         }
 
         for (Attainment attainment : studentAttainments) {
-            for (Course course : courses) {
+            for (Course course : getCourses()) {
                 if (course.getCode().equals(attainment.getCourseCode())) {
                     System.out.println("  " + course.getCode() + " " + course.getName() + ": " + attainment.getGrade());
                     break;
