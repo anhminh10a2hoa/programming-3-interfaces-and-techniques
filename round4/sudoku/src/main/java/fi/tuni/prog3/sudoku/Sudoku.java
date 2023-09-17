@@ -70,17 +70,22 @@ public class Sudoku {
     public void print() {
         for (int i = 0; i < 9; i++) {
             if (i % 3 == 0) {
-                System.out.println("+-------+-------+-------+");
+                System.out.println("#####################################");
+            } else {
+                System.out.println("#---+---+---#---+---+---#---+---+---#");
             }
             for (int j = 0; j < 9; j++) {
                 if (j % 3 == 0) {
+                    System.out.print("# ");
+                } else {
                     System.out.print("| ");
                 }
                 System.out.print(grid[i][j] + " ");
             }
-            System.out.println("|");
+            System.out.print("#");
+            System.out.println();
         }
-        System.out.println("+-------+-------+-------+");
+        System.out.println("#####################################");
     }
 
     private boolean isValidIndex(int i, int j) {
