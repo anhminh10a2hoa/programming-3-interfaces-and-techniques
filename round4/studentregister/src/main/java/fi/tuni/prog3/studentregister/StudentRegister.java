@@ -25,7 +25,7 @@ public class StudentRegister {
     public ArrayList<Course> getCourses() {
         // Sort courses by name in alphabetical order
         ArrayList<Course> sortedCourses = new ArrayList<>(courses);
-        Collections.sort(sortedCourses, Comparator.comparing(Course::getName));
+        Collections.sort(sortedCourses, Comparator.comparing(Course::getCode));
         return sortedCourses;
     }
 
@@ -71,7 +71,7 @@ public class StudentRegister {
         }
 
         for (Attainment attainment : studentAttainments) {
-            for (Course course : getCourses()) {
+            for (Course course : courses) {
                 if (course.getCode().equals(attainment.getCourseCode())) {
                     System.out.println("  " + course.getCode() + " " + course.getName() + ": " + attainment.getGrade());
                     break;
