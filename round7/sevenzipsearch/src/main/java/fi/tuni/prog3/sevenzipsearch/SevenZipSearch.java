@@ -11,27 +11,28 @@ import java.util.regex.Pattern;
 
 public class SevenZipSearch {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        try (Scanner scanner = new Scanner(System.in)) {
+            // Prompt the user for the 7z file name and search word
+            System.out.println("File: ");
+            String fileName = scanner.nextLine();
+            System.out.println("Query: ");
+            String searchWord = scanner.nextLine();
+            System.out.println();
 
-        // Prompt the user for the 7z file name and search word
-        System.out.println("File: ");
-        String fileName = scanner.nextLine();
-        System.out.println("Query: ");
-        String searchWord = scanner.nextLine();
+            try (SevenZFile sevenZFile = new SevenZFile(new File(fileName))) {
+                SevenZArchiveEntry entry;
+                while ((entry = sevenZFile.getNextEntry()) != null) {
+                    String name = entry.getName();
 
-        try (SevenZFile sevenZFile = new SevenZFile(new File(fileName))) {
-            SevenZArchiveEntry entry;
-            while ((entry = sevenZFile.getNextEntry()) != null) {
-                String name = entry.getName();
-
-                // Check if the entry is a text file
-                if (name.endsWith(".txt")) {
-                    System.out.println(name);
-                    searchAndPrintInTextFile(sevenZFile, entry, searchWord);
+                    // Check if the entry is a text file
+                    if (name.endsWith(".txt")) {
+                        System.out.println(name);
+                        searchAndPrintInTextFile(sevenZFile, entry, searchWord);
+                    }
                 }
+            } catch (IOException e) {
+                System.err.println("Error reading the 7z file: " + e.getMessage());
             }
-        } catch (IOException e) {
-            System.err.println("Error reading the 7z file: " + e.getMessage());
         }
     }
 
