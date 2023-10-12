@@ -14,9 +14,9 @@ public class SevenZipSearch {
         Scanner scanner = new Scanner(System.in);
 
         // Prompt the user for the 7z file name and search word
-        System.out.print("File: ");
+        System.out.println("File: ");
         String fileName = scanner.nextLine();
-        System.out.print("Query: ");
+        System.out.println("Query: ");
         String searchWord = scanner.nextLine();
 
         try (SevenZFile sevenZFile = new SevenZFile(new File(fileName))) {
