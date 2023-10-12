@@ -1,57 +1,63 @@
-
 package fi.tuni.prog3.sevenzipsearch;
+
+import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
+import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
-import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
-import org.apache.commons.compress.archivers.sevenz.SevenZFile;
+import java.util.regex.Pattern;
 
 public class SevenZipSearch {
-    public static void main(String[] args) throws IOException {
-        try(SevenZFile sevenZFile = new SevenZFile(new File(args[0]))){
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt the user for the 7z file name and search word
+        System.out.print("File: ");
+        String fileName = scanner.nextLine();
+        System.out.print("Query: ");
+        String searchWord = scanner.nextLine();
+
+        try (SevenZFile sevenZFile = new SevenZFile(new File(fileName))) {
             SevenZArchiveEntry entry;
-            while((entry = sevenZFile.getNextEntry())!= null){
+            while ((entry = sevenZFile.getNextEntry()) != null) {
                 String name = entry.getName();
-                //Entry is a file it ends with ".txt"
-                if(!name.substring(name.length()-4).equals(".txt") || name.length()< 4){
-                return;
-                }
-                else{
+
+                // Check if the entry is a text file
+                if (name.endsWith(".txt")) {
                     System.out.println(name);
-                    // Now the file is read and given word is searched
-                    // If the word is found, the row is printed
-                    InputStream input = sevenZFile.getInputStream(entry);
-                    try (Scanner scanner = new Scanner(input)) {
-                        int rownum = 1;
-                        String wordtosearch = args[1].toLowerCase();
-                        while(scanner.hasNext()){
-                            String line = scanner.nextLine();
-                            String[] words = line.split(" "); 
-                            
-                            if(line.toLowerCase().contains(wordtosearch)){
-                               int x1 = 0;
-                                while (x1 < words.length) {
-                                if (words[x1].toLowerCase().equals(wordtosearch)) {
-                                    words[x1] = words[x1].toUpperCase();
-                                } else if (words[x1].toLowerCase().contains(wordtosearch)) {
-                                    int pos = words[x1].toLowerCase().indexOf(wordtosearch);
-                                    String temp = words[x1].substring(pos, pos + wordtosearch.length()).toUpperCase();
-                                    words[x1] = words[x1].substring(0, pos) + temp + words[x1].substring(pos + wordtosearch.length());
-                                }
-                                x1++;
-                            }
-                                line = String.join(" ", words);
-                                System.out.println(rownum + ": " + line);                               
-                            } 
-                            rownum++;
-                            }
-                            System.out.println();                         
-                        }
-                    }
+                    searchAndPrintInTextFile(sevenZFile, entry, searchWord);
                 }
-                sevenZFile.close();
-        } 
-}
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the 7z file: " + e.getMessage());
+        }
+    }
+
+    private static void searchAndPrintInTextFile(SevenZFile sevenZFile, SevenZArchiveEntry entry, String searchWord) throws IOException {
+        InputStream input = sevenZFile.getInputStream(entry);
+        try (Scanner scanner = new Scanner(input)) {
+            int lineNumber = 1;
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (containsCaseInsensitive(line, searchWord)) {
+                    // Print the line with the search word in uppercase
+                    String modifiedLine = highlightWord(line, searchWord);
+                    System.out.println(lineNumber + ": " + modifiedLine);
+                }
+                lineNumber++;
+            }
+            System.out.println(); // Extra newline after each entry
+        }
+    }
+
+    private static boolean containsCaseInsensitive(String line, String searchWord) {
+        return Pattern.compile(Pattern.quote(searchWord), Pattern.CASE_INSENSITIVE).matcher(line).find();
+    }
+
+    private static String highlightWord(String line, String searchWord) {
+        return line.replaceAll("(?i)" + Pattern.quote(searchWord), searchWord.toUpperCase());
+    }
 }
