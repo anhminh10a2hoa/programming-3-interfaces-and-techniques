@@ -1,8 +1,7 @@
 package fi.tuni.prog3.json;
 
 /**
- * A class for representing a JSON value. The value can be either a double,
- * a boolean, a String or null.
+ * A class for representing a JSON value. The value can be either a double, a boolean, a String or null.
  */
 
 public class ValueNode extends Node {
@@ -19,7 +18,7 @@ public class ValueNode extends Node {
     
     /**
      * Constructs a JSON value node that stores the given double value.
-     * @param value - The double value to store in the new JSON value node. 
+     * @param value The double value to store in the new JSON value node. 
      */
     public ValueNode(double value){  
         this.number = value;        
@@ -27,7 +26,7 @@ public class ValueNode extends Node {
     
     /**
      * Constructs a JSON value node that stores the given boolean value.
-     * @param value - The boolean value to store in the new JSON value node. 
+     * @param value The boolean value to store in the new JSON value node. 
      */
     public ValueNode(boolean value){ 
         this.bool = value;
@@ -36,9 +35,13 @@ public class ValueNode extends Node {
     
     /**
      * Constructs a JSON value node that stores the given string.
-     * @param value - The string or null to store in the new JSON value node. 
+     * @param value The string to store in the new JSON value node.
+     * @throws IllegalStateException if the parameter value is null.
      */
     public ValueNode(String value){
+        if (value == null) {
+            throw new IllegalStateException("ValueNode cannot store a null value.");
+        }
         this.string = value;
     }
     
@@ -77,7 +80,7 @@ public class ValueNode extends Node {
     /**
      * Returns the stored value as a number (double).
      * @return the stored number as a double value.
-     * @throws IllegalStateException - if the stored value is not a number.
+     * @throws IllegalStateException if the stored value is not a number.
      */
     public double getNumber(){
         return number;
@@ -86,7 +89,7 @@ public class ValueNode extends Node {
      /**
      * Returns the stored value as a boolean value.
      * @return the stored boolean value.
-     * @throws IllegalStateException - if the stored value is not a boolean value.
+     * @throws IllegalStateException if the stored value is not a boolean value.
      */
     public boolean getBoolean(){
         return bool;
@@ -95,7 +98,7 @@ public class ValueNode extends Node {
     /**
      * Returns the stored value as a string.
      * @return the stored string.
-     * @throws IllegalStateException - if the stored value is not a string.
+     * @throws IllegalStateException if the stored value is not a string.
      */
     public String getString(){
         return string;
@@ -104,7 +107,7 @@ public class ValueNode extends Node {
     /**
      * Returns the stored value as null.
      * @return null.
-     * @throws IllegalStateException - if the stored value is not null.
+     * @throws IllegalStateException if the stored value is not null.
      */
     public Object getNull(){
         return null;
