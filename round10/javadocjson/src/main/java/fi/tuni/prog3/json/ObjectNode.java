@@ -7,7 +7,7 @@ import java.util.Iterator;
  * A class for representing a JSON object.
  */
 
-public final class ObjectNode extends Node implements Iterable<String>{
+public class ObjectNode extends Node implements Iterable<String>{
     private TreeMap<String, Node> jsonObject;
     
     /**

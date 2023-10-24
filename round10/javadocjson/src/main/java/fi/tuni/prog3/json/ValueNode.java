@@ -5,7 +5,7 @@ package fi.tuni.prog3.json;
  * a boolean, a String or null.
  */
 
-public final class ValueNode extends Node {
+public class ValueNode extends Node {
     private double number;
     private boolean bool;
     private boolean boolchanged = false;
