@@ -18,7 +18,7 @@ public class ValueNode extends Node {
     }
     
     /**
-     * Constructs a JSON value node that stores the null value.
+     * Constructs a JSON value node that stores the given double value.
      * @param value - The double value to store in the new JSON value node. 
      */
     public ValueNode(double value){  
@@ -35,7 +35,7 @@ public class ValueNode extends Node {
     }
     
     /**
-     * Constructs a JSON value node that stores the given string or null.
+     * Constructs a JSON value node that stores the given string.
      * @param value - The string or null to store in the new JSON value node. 
      */
     public ValueNode(String value){
