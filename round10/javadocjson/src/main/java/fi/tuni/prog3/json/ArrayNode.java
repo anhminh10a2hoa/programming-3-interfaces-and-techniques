@@ -41,5 +41,4 @@ public final class ArrayNode extends Node implements Iterable<Node> {
     public Iterator<Node> iterator(){
         return arraynode.iterator();
     }
-   
 }

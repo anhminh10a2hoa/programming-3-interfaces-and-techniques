@@ -5,7 +5,7 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>fi.tuni.prog3.json</groupId>
-  <artifactId>json</artifactId>
+  <artifactId>javadocjson</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
   <properties>
