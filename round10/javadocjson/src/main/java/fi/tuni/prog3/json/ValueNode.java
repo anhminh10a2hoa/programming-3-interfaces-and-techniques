@@ -10,6 +10,12 @@ public class ValueNode extends Node {
     private boolean bool;
     private boolean boolchanged = false;
     private String string;
+
+    /**
+     * Constructs a JSON value node that stores the null value.
+     */
+    public ValueNode() {
+    }
     
     /**
      * Constructs a JSON value node that stores the null value.
