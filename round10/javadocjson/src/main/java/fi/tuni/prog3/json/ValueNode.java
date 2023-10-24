@@ -12,18 +12,16 @@ public final class ValueNode extends Node {
     private String string;
     
     /**
-     * Constructs a JSON value node that stores the given double value.
-     * @param value - The double value to store in the new JSON value node. 
+     * Constructs a JSON value node that stores the null value.
      */
-    public ValueNode(double value){  
-        this.number = value;        
+    public ValueNode(){     
     }
     
     /**
      * Constructs a JSON value node that stores the given boolean value.
-     * @param value - The boolean value to store in the new JSON value node. 
+     * @param value - The double value to store in the new JSON value node.
      */
-    public ValueNode(boolean value){ 
+    public ValueNode(double value){ 
         this.bool = value;
         this.boolchanged = true;
     }

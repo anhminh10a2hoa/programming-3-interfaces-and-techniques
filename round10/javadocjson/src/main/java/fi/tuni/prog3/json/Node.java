@@ -36,4 +36,10 @@ public abstract class Node {
     public boolean isValue() {
       return this instanceof ValueNode;
     }
+
+    /**
+     * Prints the JSON data to the screen.
+     */
+    public void printJson() {
+    }
 }
