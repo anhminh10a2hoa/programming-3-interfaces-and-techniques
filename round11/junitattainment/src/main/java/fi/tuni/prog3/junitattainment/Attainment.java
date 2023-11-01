@@ -11,7 +11,7 @@ public class Attainment implements Comparable<Attainment>{
 
     public Attainment(String courseCode, String studentNumber, int grade) {
         if(courseCode == null || studentNumber == null || grade < 0|| grade > 5 ){
-            throw new IllegalArgumentException("Illegal argumet");
+            throw new IllegalArgumentException("Invalid course code, student number or grade!");
         }
         this.courseCode = courseCode;
         this.studentNumber = studentNumber;
